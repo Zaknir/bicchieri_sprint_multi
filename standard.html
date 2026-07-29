@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estrattore Carte Ordine Oggetti</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        #container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 90%;
+            width: 500px;
+        }
+
+        h1 {
+            color: #0056b3;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s;
+            margin-bottom: 25px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        #risultato {
+            margin-top: 20px;
+            font-size: 1.5em; /* Aumentato per enfasi sulla singola frase */
+            font-weight: bold;
+            text-align: center;
+            padding: 20px;
+            border: 2px solid #007bff;
+            border-radius: 8px;
+            background-color: #fff;
+            color: #333;
+        }
+
+        .color-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+            gap: 10px;
+        }
+
+        .color-box {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid #333;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Colori per i div */
+        .Rosso { background-color: #ff4d4d; }
+        .Verde { background-color: #4dff4d; }
+        .Blu { background-color: #4d4dff; }
+        .Giallo { background-color: #ffff4d; }
+        .Nero { background-color: #333; }
+
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        <h1>Estrattore Carte Ordine Oggetti</h1>
+        
+        <button id="estraiCarta">Estrai Nuova Carta</button>
+
+        <div id="risultato" role="alert" aria-live="polite">
+            Clicca sul pulsante per estrarre la combinazione.
+        </div>
+        
+        <div id="coloriVisuali" class="color-display">
+            </div>
+    </div>
+
+    <script>
+        // Array dei colori e delle direzioni disponibili
+        const colori = ["Rosso", "Verde", "Blu", "Giallo", "Nero"];
+        const direzioni = ["da Sinistra a Destra", "da Destra a Sinistra", "dall'Alto in Basso", "dal Basso in Alto"];
+        
+        // Storico delle combinazioni recenti per evitare ripetizioni
+        const storicoCombinazioni = [];
+        const MAX_STORICO = 5; // Non ripetere la stessa combinazione per almeno 5 volte
+
+        const risultatoDiv = document.getElementById('risultato');
+        const coloriVisualiDiv = document.getElementById('coloriVisuali');
+        const estraiButton = document.getElementById('estraiCarta');
+
+        // Funzione per mischiare un array (Algoritmo di Fisher-Yates)
+        function mischiaArray(array) {
+            let arrayCopiato = [...array]; 
+            let currentIndex = arrayCopiato.length, randomIndex;
+
+            while (currentIndex !== 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+
+                [arrayCopiato[currentIndex], arrayCopiato[randomIndex]] = [
+                    arrayCopiato[randomIndex], arrayCopiato[currentIndex]];
+            }
+
+            return arrayCopiato;
+        }
+
+        // Funzione principale per estrarre la carta
+        function estraiCarta() {
+            let combinazioneValida = false;
+            let direzioneCasuale;
+            let ordineCasualeColori;
+            let combinazioneChiave;
+
+            // Loop per garantire l'anti-ripetizione
+            while (!combinazioneValida) {
+                // 1. Estrai la direzione
+                direzioneCasuale = direzioni[Math.floor(Math.random() * direzioni.length)];
+
+                // 2. Mischa l'ordine dei colori
+                ordineCasualeColori = mischiaArray(colori);
+
+                // 3. Crea la "chiave" univoca
+                combinazioneChiave = direzioneCasuale + "|" + ordineCasualeColori.join(',');
+
+                // 4. Controlla lo storico
+                if (!storicoCombinazioni.includes(combinazioneChiave)) {
+                    combinazioneValida = true;
+                }
+            }
+
+            // 5. Aggiorna lo storico
+            storicoCombinazioni.unshift(combinazioneChiave);
+            if (storicoCombinazioni.length > MAX_STORICO) {
+                storicoCombinazioni.pop(); 
+            }
+
+            // 6. Genera la singola frase
+            const coloriTesto = ordineCasualeColori.join(', '); 
+            // La frase finale è semplice: [Direzione], [Colore1], [Colore2], ...
+            const fraseFinale = `${direzioneCasuale}, ${coloriTesto}.`;
+
+            // 7. Aggiorna la visualizzazione HTML (come singola frase)
+            risultatoDiv.textContent = fraseFinale;
+            
+            // 8. Aggiorna la visualizzazione dei cerchi colorati
+            coloriVisualiDiv.innerHTML = ''; 
+            ordineCasualeColori.forEach(colore => {
+                const box = document.createElement('div');
+                box.className = `color-box ${colore}`; 
+                // Aggiungiamo un attributo ARIA per l'assistente vocale del telefono
+                box.setAttribute('aria-label', colore);
+                coloriVisualiDiv.appendChild(box);
+            });
+            
+            // **Nota per l'accessibilità:** // L'assistente vocale del telefono leggerà il contenuto di risultatoDiv
+            // e gli 'aria-label' dei box colorati, fornendo l'informazione completa.
+        }
+
+        // Event listener per il pulsante
+        estraiButton.addEventListener('click', estraiCarta);
+        
+        // Esegui l'estrazione all'avvio
+        estraiCarta();
+        
+    </script>
+</body>
+</html>
