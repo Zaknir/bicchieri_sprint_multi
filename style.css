@@ -1,94 +1,321 @@
+/* =========================================================
+   Bicchieri Sprint — stile comune
+   Struttura ispirata al layout di giochiamoci.it.
+   I colori del gioco restano separati e riconoscibili.
+   ========================================================= */
+
+:root {
+    --sfondo: #DBCFE2;
+    --superficie: antiquewhite;
+    --testo: #424464;
+    --bordo: #424464;
+    --accento: #E6DCEB;
+    --accento-hover: #736754;
+    --risultato-sfondo: #E6DCEB;
+    --campo-sfondo: #E6DCEB;
+    --ombra: rgba(66, 68, 100, 0.10);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
 body {
-    font-family: 'Arial', sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* justify-content: flex-start permette lo scorrimento se il contenuto eccede lo schermo */
-    justify-content: flex-start; 
-    min-height: 100vh;
+    background-color: var(--sfondo);
     margin: 0;
-    padding: 20px 0; /* Spazio extra per il respiro su mobile */
-    background-color: #f4f4f9;
-    color: #333;
-    overflow-y: auto; /* Abilita lo scroll verticale */
+    padding: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: var(--testo);
+    font-size: 18px;
+    line-height: 1.5;
+    letter-spacing: 0.12em;
+    word-spacing: 0.16em;
+    text-align: left;
+    min-height: 100vh;
+}
+
+/* Contenitore generale: mantiene le righe leggibili come sul sito principale. */
+.page {
+    width: min(100%, 70ch);
+    margin: 0 auto;
+}
+
+header,
+section,
+footer,
+#container {
+    background-color: var(--superficie);
+    padding: 20px;
+    margin: 10px;
+    border-radius: 15px;
+    border: 1px solid var(--bordo);
 }
 
 #container {
-    background-color: #fff;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 70ch;
+    margin: 10px auto;
     text-align: center;
-    max-width: 90%;
-    width: 450px;
-    margin: auto; /* Centra il contenitore se c'è spazio, altrimenti permette lo scroll */
+    box-shadow: 0 4px 15px var(--ombra);
+}
+
+h1,
+h2,
+h3,
+p {
+    margin-top: 0;
 }
 
 h1 {
-    color: #0056b3;
+    color: var(--testo);
     margin-bottom: 20px;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
+    line-height: 1.25;
 }
 
+h2 {
+    font-size: 1.25rem;
+}
+
+p {
+    margin-bottom: 1em;
+}
+
+a {
+    color: var(--testo);
+    font-weight: bold;
+    text-decoration: underline;
+    transition: color 0.2s, border 0.2s;
+}
+
+a:hover {
+    color: var(--accento-hover);
+    border: 3px solid var(--accento-hover);
+}
+
+/* Header coerente con la struttura del sito principale. */
+.header-main-box {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.testi-header {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.testi-header h1,
+.testi-header .motto {
+    margin: 0;
+}
+
+.logo {
+    max-height: 10ch;
+    width: auto;
+}
+
+nav {
+    margin-top: 20px;
+}
+
+/* Pulsanti: stessa logica visiva delle pagine di giochiamoci.it,
+   ma con la palette funzionale del gioco. */
+button {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    background-color: var(--accento);
+    color: var(--testo);
+    border: solid 2px var(--testo);
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 10px;
+    transition: color 0.2s, background-color 0.2s, transform 0.1s;
+}
+
+button:hover {
+    color: var(--testo);
+    background-color: var(--sfondo);
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+button:focus-visible,
+input:focus-visible {
+    outline: 3px solid rgba(66, 68, 100, 0.35);
+    outline-offset: 2px;
+}
+
+/* Pagina iniziale */
+.btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btn-group button {
+    width: 100%;
+    padding: 14px 20px;
+    font-size: 1.05em;
+}
+
+.btn-group button span {
+    display: block;
+    font-size: 0.85em;
+    font-weight: normal;
+    margin-top: 4px;
+}
+
+/* Form della versione personalizzabile */
 .input-group {
     margin-bottom: 20px;
     display: grid;
     grid-template-columns: 1fr;
-    gap: 8px;
+    gap: 10px;
 }
 
-input {
-    padding: 10px; /* Ridotto leggermente per risparmiare spazio verticale */
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    text-align: center;
-    font-size: 1em;
-    width: 100%;
-    box-sizing: border-box; /* Include padding nel calcolo della larghezza */
-}
-
-button {
-    padding: 15px 30px;
-    font-size: 1.1em;
-    color: white;
-    background-color: #007bff;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    width: 100%;
-    margin-bottom: 20px;
-    transition: transform 0.1s, background-color 0.2s;
-}
-
-button:active { 
-    transform: scale(0.98); 
-    background-color: #0056b3;
-}
-
-#risultato {
-    margin-top: 10px;
-    font-size: 1.1em;
+form label {
+    display: block;
+    margin-bottom: 5px;
     font-weight: bold;
-    padding: 15px;
-    border: 2px solid #007bff;
+}
+
+input[type="text"],
+input[type="email"],
+select,
+textarea {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    margin-bottom: 5px;
+    border: 1px solid var(--bordo);
     border-radius: 8px;
+    background-color: var(--campo-sfondo);
+    color: var(--testo);
+    font: inherit;
+    text-align: center;
+}
+
+/* Risultato */
+#risultato {
+    margin-top: 15px;
+    font-size: 1.25em;
+    font-weight: bold;
+    text-align: center;
+    padding: 20px;
+    border: 2px solid var(--testo);
+    border-radius: 10px;
+    background-color: var(--risultato-sfondo);
+    color: var(--testo);
     min-height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #e7f1ff;
-    word-break: break-word; /* Evita che il testo esca dai bordi */
+    word-break: break-word;
 }
 
-/* Ottimizzazione per schermi molto piccoli (es. iPhone SE) */
+/* Visualizzazione dei colori della versione standard */
+.color-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 25px;
+    gap: 10px;
+}
+
+.color-box {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #424464;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    flex: 0 0 auto;
+}
+
+/* Colori funzionali del gioco: NON modificare per uniformare il layout. */
+.Rosso { background-color: #ff4d4d; }
+.Verde { background-color: #4dff4d; }
+.Blu { background-color: #4d4dff; }
+.Giallo { background-color: #ffff4d; }
+.Nero { background-color: #333; }
+
+footer {
+    font-size: 0.85em;
+    text-align: center;
+}
+
+/* Schermi piccoli */
+@media (max-width: 800px) {
+    body {
+        padding: 0;
+        font-size: 17px;
+    }
+
+    header,
+    section,
+    footer,
+    #container {
+        padding: 16px;
+        margin: 6px 0;
+        border-radius: 12px;
+    }
+
+    .header-main-box {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 12px;
+    }
+
+    .logo {
+        max-height: 100px;
+    }
+
+    .testi-header h1 {
+        font-size: 1.4rem;
+        line-height: 1.2;
+    }
+
+    .testi-header .motto {
+        font-size: 0.95rem;
+        line-height: 1.4;
+    }
+
+    #container h1 {
+        font-size: 1.4rem;
+    }
+
+    button {
+        padding: 12px 18px;
+    }
+
+    #risultato {
+        font-size: 1.1em;
+        padding: 16px;
+    }
+}
+
+/* Schermi molto bassi: riduce lo spazio verticale senza compromettere lo scroll. */
 @media (max-height: 600px) {
     #container {
-        padding: 15px;
+        padding: 14px;
     }
-    input {
+
+    input[type="text"] {
         padding: 8px;
     }
+
     h1 {
-        margin-bottom: 10px;
+        margin-bottom: 12px;
     }
 }
