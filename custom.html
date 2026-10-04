@@ -3,35 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estrattore Ordine Oggetti</title>
+    <meta name="description" content="Bicchieri Sprint: crea una sequenza personalizzata di oggetti.">
+    <title>Bicchieri Sprint — Gioco personalizzabile</title>
 
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Estrattore">
-    <link rel="apple-touch-icon" href="icona-192.png">
-
-    <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <main class="page">
+        <header>
+            <h1>Inserisci Oggetti</h1>
+            <p>Inserisci i cinque oggetti che vuoi utilizzare nella sequenza.</p>
+        </header>
 
-    <div id="container">
-        <h1>Inserisci Oggetti</h1>
-        
-        <div class="input-group" id="inputWrapper">
-            <input type="text" class="input-oggetto" placeholder="Oggetto 1" value="Mela">
-            <input type="text" class="input-oggetto" placeholder="Oggetto 2" value="Libro">
-            <input type="text" class="input-oggetto" placeholder="Oggetto 3" value="Chiave">
-            <input type="text" class="input-oggetto" placeholder="Oggetto 4" value="Palla">
-            <input type="text" class="input-oggetto" placeholder="Oggetto 5" value="Orologio">
-        </div>
+        <section aria-label="Oggetti personalizzati">
+            <div class="input-group" id="inputWrapper">
+                <input type="text" class="input-oggetto" placeholder="Oggetto 1" value="Mela" aria-label="Oggetto 1">
+                <input type="text" class="input-oggetto" placeholder="Oggetto 2" value="Libro" aria-label="Oggetto 2">
+                <input type="text" class="input-oggetto" placeholder="Oggetto 3" value="Chiave" aria-label="Oggetto 3">
+                <input type="text" class="input-oggetto" placeholder="Oggetto 4" value="Palla" aria-label="Oggetto 4">
+                <input type="text" class="input-oggetto" placeholder="Oggetto 5" value="Orologio" aria-label="Oggetto 5">
+            </div>
 
-        <button id="btnEstrai">Estrai Sequenza</button>
+            <button id="btnEstrai" type="button">Estrai Sequenza</button>
 
-        <div id="risultato" role="alert" aria-live="polite">
-            Clicca per estrarre.
-        </div>
-    </div>
+            <div id="risultato" role="alert" aria-live="polite">
+                Clicca per estrarre.
+            </div>
+        </section>
+
+        <footer>
+            <a href="index.html">Torna alla scelta della versione</a>
+        </footer>
+    </main>
 
     <script src="script.js"></script>
 </body>
