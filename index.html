@@ -3,91 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scegli la versione dell'app</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            margin: 0;
-            background-color: #f4f4f9;
-            color: #333;
-        }
-
-        #container {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            max-width: 90%;
-            width: 500px;
-        }
-
-        h1 {
-            color: #0056b3;
-            margin-bottom: 25px;
-            font-size: 1.8em;
-        }
-
-        .btn-group {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        button {
-            padding: 15px 20px;
-            font-size: 1.1em;
-            color: white;
-            background-color: #007bff;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.1s;
-            text-align: center;
-            line-height: 1.4;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        button:active {
-            transform: scale(0.98);
-        }
-
-        button span {
-            display: block;
-            font-size: 0.85em;
-            font-weight: normal;
-            opacity: 0.9;
-            margin-top: 4px;
-        }
-    </style>
+    <meta name="description" content="Bicchieri Sprint: scegli la versione del gioco.">
+    <title>Bicchieri Sprint — Scegli la versione</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <main class="page">
+        <header>
+            <h1>Scegli la versione dell'app</h1>
+            <p>Seleziona la modalità di gioco che vuoi utilizzare.</p>
+        </header>
 
-    <div id="container">
-        <h1>Scegli la versione dell'app</h1>
-        
-        <div class="btn-group">
-            <!-- Sostituisci 'gioco_standard.html' con il nome reale del file della versione standard -->
-            <button onclick="window.location.href='standard.html'">
-                Gioco standard
-                <span>con i bicchieri</span>
-            </button>
+        <section aria-label="Versioni del gioco">
+            <div class="btn-group">
+                <button type="button" onclick="window.location.href='standard.html'">
+                    Gioco standard
+                    <span>con i bicchieri</span>
+                </button>
 
-            <!-- Sostituisci 'gioco_personalizzabile.html' con il nome reale del file della versione personalizzabile -->
-            <button onclick="window.location.href='custom.html'">
-                Gioco personalizzabile
-                <span>scegli tu che oggetti usare</span>
-            </button>
-        </div>
-    </div>
+                <button type="button" onclick="window.location.href='custom.html'">
+                    Gioco personalizzabile
+                    <span>scegli tu che oggetti usare</span>
+                </button>
+            </div>
+        </section>
 
+        <footer>
+            Bicchieri Sprint
+        </footer>
+    </main>
 </body>
 </html>
